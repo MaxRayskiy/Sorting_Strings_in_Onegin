@@ -1,27 +1,56 @@
-/*
- *
+/*! @file main.cpp
+ * Sorting Onegin
 */
+
 #include <algorithm>
 #include <iostream>
 #include <vector>
 
+//! @class SortStringsInFile
+
 class SortStringsInFile {
+    /// Указатель на входной поток
     FILE *input_text;
+
+    /// размер файла в байтах
     long file_size;
+
+    /// Вектор указателей на начала  строк
     std::vector<char*> str_begins;
+
+    /// Вектор указателей на начала  строк
     std::vector<char *> str_ends;
+
+    /// Указатель на начало текста
     char *full_text;
 
-    inline static bool IsAlphaOrNum(const char symbol); // true, если буква или цифра
-    static int CmpInOrder(const void *f, const void *s);
-    static int CmpFromEnd(const void *f, const void *s);
+    ///Метод, проверяющий, что символ является латинской буквой или цифрой
+    ///@warning только латинские символы!
+    ///@todo добавить кириллицу
+    ///@param[in] symbol Анализируемый символ
+    ///@return true, если симфол является латинской буквой или цифрой
+    inline static bool IsAlphaOrNum(const char symbol);
+
+    /// Компаратор для сортировки с начала
+    static int CmpInOrder(const void *input_first, const void *input_second);
+
+    /// Компаратор для сортировки с конца
+    static int CmpFromEnd(const void *input_first, const void *input_second);
 
 public:
+    /// Конструктор по умолчанию
     SortStringsInFile();
+
+    /// Считываем текст из потока
     void ReadText();
+
+    /// Сортируем и выводим строки с начала
     void SortInOrder();
+
+    /// Сортируем и выводим строки с конца
     void SortFromEnd();
 
+    /// Деструктор по умолчанию
     ~SortStringsInFile();
 };
 
@@ -72,9 +101,9 @@ inline bool SortStringsInFile::IsAlphaOrNum(const char symbol) {  // true, ес�
 }
 
 
-int SortStringsInFile::CmpInOrder(const void *f, const void *s) {
-    const char *first = *(const char**) f;
-    const char *second = *(const char**) s;
+int SortStringsInFile::CmpInOrder(const void *input_first, const void *input_second) {
+    const char *first = *(const char**) input_first;
+    const char *second = *(const char**) input_second;
 
     int i = -1, j = -1;
 
@@ -116,9 +145,9 @@ void SortStringsInFile::SortInOrder() {
     fclose(output);
 }
 
-int SortStringsInFile::CmpFromEnd(const void *f, const void *s){
-    const char *first = *(const char**) f;
-    const char *second = *(const char**) s;
+int SortStringsInFile::CmpFromEnd(const void *input_first, const void *input_second){
+    const char *first = *(const char**) input_first;
+    const char *second = *(const char**) input_second;
 
     int i = 1, j = 1;
 
@@ -161,7 +190,7 @@ void SortStringsInFile::SortFromEnd() {
                 break;
             }
         }
-    } //работает. страшно.
+    }
     fclose(output);
 }
 
