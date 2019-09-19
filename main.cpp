@@ -27,7 +27,7 @@ class SortStringsInFile {
     ///Метод, проверяющий, что символ является латинской буквой или цифрой
     ///@warning только латинские символы!
     ///@todo добавить кириллицу
-    ///@param[in] symbol Анализируемый символ
+    ///@param symbol Анализируемый символ
     ///@return true, если симфол является латинской буквой или цифрой
     inline static bool IsAlphaOrNum(const char symbol);
 
@@ -81,16 +81,23 @@ void SortStringsInFile::ReadText() {
 
     int c = fgetc(input_text);
     while ( c != EOF) {
-        full_text[i++] = static_cast<char>(c);
+        full_text[i] = static_cast<char>(c);
 
         if (c == 10) {// 10 == (int)'\n'
-            str_begins.push_back(&full_text[i]);
+            if (i >= 1) {
+                if (full_text[i - 1] == '\n') {
+                    str_begins.pop_back();
+                }
 
-            if (i > 1) {
-                str_ends.push_back(&full_text[i - 2]);
+                if (full_text[i - 1] != '\n') {
+                    str_ends.push_back(&full_text[i - 1]);
+                }
             }
+
+            str_begins.push_back(&full_text[i + 1]);
         }
 
+        ++i;
         c = fgetc(input_text);
     }
     str_ends.push_back(&full_text[file_size - 2]);
