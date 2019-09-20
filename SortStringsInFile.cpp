@@ -26,7 +26,7 @@ void SortStringsInFile::ReadText() {
     while ( c != EOF) {
         full_text[i] = static_cast<char>(c);
 
-        if (c == 10) {// 10 == (int)'\n'
+        if (c == '\n') {
             if (i >= 1) {
                 if (full_text[i - 1] == '\n') {
                     // если предыдущая строка пуста, уберем
