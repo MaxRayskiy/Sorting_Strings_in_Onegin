@@ -3,6 +3,7 @@
 */
 
 #include <algorithm>
+#include <cstdio>
 #include <iostream>
 #include <vector>
 
@@ -27,7 +28,7 @@ class SortStringsInFile {
     ///@warning только латинские символы!
     ///@todo добавить кириллицу
     ///@param symbol Анализируемый символ
-    ///@return true, если симdол является латинской буквой или цифрой
+    ///@return true, если символ является латинской буквой или цифрой
     inline static bool IsAlphaOrNum(const char &symbol);
 
     /// Компаратор для сортировки с начала
@@ -49,6 +50,7 @@ public:
     /// Сортируем и выводим строки с конца
     void SortFromEnd();
 
+    /// Возвращаем исходный текст
     void ReturnText();
 
     /// Деструктор по умолчанию
