@@ -1,7 +1,10 @@
 /*! @file
  * Sorting Onegin
 */
+
 #include "SortStringsInFile.h"
+#include <cassert>
+#include <iostream>
 
 SortStringsInFile::SortStringsInFile() {
     if ((input_text = fopen("..//Onegin.txt", "r")) == nullptr) {
@@ -77,8 +80,7 @@ int SortStringsInFile::CmpFromBegin(const void *input_first, const void *input_s
             return -1;
         else if (first[i] > second[j])
             return 1;
-        else
-            continue; // строки совпали, смотрим дальше
+        //else continue - строки совпали, смотрим дальше
     }
 }
 
@@ -87,8 +89,7 @@ void SortStringsInFile::SortFromBegin() {
 
     FILE *output;
     output = fopen("..//Sorted_From_the_beginning.txt", "w+");
-    if (output == nullptr)
-        return;
+    assert (output != nullptr);
 
     for (const char *ch: str_begins) {
         for (int i = 0; ;++i) {
@@ -136,8 +137,7 @@ void SortStringsInFile::SortFromEnd() {
 
     FILE *output;
     output = fopen("..//Sorted_From_the_end.txt", "w+");
-    if (output == nullptr)
-        return;
+    assert (output != nullptr);
 
     for (const char *ch: str_ends) {
         for(int i = 0; ; --i) {
