@@ -2,14 +2,18 @@
  * Sorting Onegin
 */
 
-#include "SortStringsInFile.h"
+#include "Document.h"
 
 int main() {
-    SortStringsInFile Onegin;
-    Onegin.ReadText();
-    Onegin.SortFromBegin();
-    Onegin.SortFromEnd();
-    Onegin.ReturnText();
+    Document Onegin;
+    Onegin.ReadFromInputSream();
 
+    Onegin.SortStrFromBegin();
+    Onegin.DumpSorted();
+
+    Onegin.SortStrFromEnd();
+    Onegin.DumpSorted();
+
+    Onegin.DumpSourceText();
     return 0;
 }
